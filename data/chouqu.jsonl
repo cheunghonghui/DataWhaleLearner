@@ -1,0 +1,59 @@
+{"input":" Lora方法的核心原理","target":" 在大语言模型上对指定参数增加额外的低秩矩阵，并在原始PLM旁边增加一个降维再升维的操作。"}
+{"input":" 如何缓解LLMs复读机问题","target":" 使用可微调的virtual token取代了原来的discrete tokens，且仅加入到输入层，并使用prompt encoder（BiLSTM+MLP）对virtual token进行编码学习。"}
+{"input":" Stable diffusion的原理","target":" 总共包含三个主要的组件，每个组件都拥有一个独立的神经网络：1）Clip Text用于文本编码；2）UNet + Scheduler在信息（潜）空间中逐步处理/扩散信息；3）自编码器解码器（Autoencoder Decoder），使用处理过的信息矩阵绘制最终图像的解码器。"}
+{"input":" 为何现在的大模型大部分是Decoder only结构","target":" 因为Decoder-only架构主要通过预训练和微调任务生成能力很强，且具有很强的语言理解和生成能力。而在理论上是因为Encoder的双向注意力会存在低秩问题，这可能会削弱模型表达能力。"}
+{"input":" 如何缓解LLMs复读机问题","target":" 包括多样性训练数据、引入噪声、温度参数调整、后处理和过滤、Beam搜索调整以及人工干预和控制等方法。"}
+{"input":" 为什么transformer块使用LayerNorm而不是BatchNorm","target":" LayerNorm是对单个样本的所有维度特征做归一化，不依赖于batch的大小和输入sequence的长度，因此可以用于batchsize为1和RNN中sequence的normalize操作。"}
+{"input":" Transformer为何使用多头注意力机制","target":" 多头保证了transformer可以注意到不同子空间的信息，捕捉到更加丰富的特征信息。"}
+{"input":" 监督微调SFT后LLM表现下降的原因","target":" 这是因为模型可能过度适应于微调数据，而忽视了预训练阶段学到的知识，这种现象被称为灾难性遗忘。"}
+{"input":" 微调阶段样本量规模增大导致的OOM错误","target":" 当样本量规模增大时，可能会出现OOM（Out of Memory）错误，这是因为模型需要更多的内存来存储和处理数据。可以通过减小批量大小、使用梯度累积或使用模型并行来解决。"}
+{"input":" 连接文本和图像的CLIP架构简介","target":" CLIP把自然语言级别的抽象概念带到计算机视觉里来，确定一系列query，然后通过搜索引擎搜集图像，最后通过50万条query，搜索得到4亿个图像文本对。然后将Text Decoder从文本中提取的语义特征和Image Decoder从图像中提取的语义特征进行匹配训练。"}
+{"input":" Attention计算复杂度以及如何改进","target":" Attention计算的时间复杂度为O(N^2)，可以采用自注意力机制、局部注意力机制、基于近似的方法以及压缩注意力机制等方法来降低计算复杂度。"}
+{"input":" BERT用于分类任务的优点，后续改进工作有哪些？","target":" BERT的结构中包含了双向的Transformer编码器，这使得BERT能够更好地捕捉文本中的双向上下文信息。BERT的后续改进工作主要包括RoBERTa、ALBERT等预训练模型的改进，以及Electra、DeBERTa等通过调整BERT的架构和超参数进一步优化模型性能的工作。"}
+{"input":" DoLa：通过对比层解码提高大型语言模型的真实性有哪些策略？","target":" 在大型语言模型（llms）中减少幻觉的策略主要包括：DoLa，通过对比层解码提高大型语言模型的真实性；在高质量数据上微调小型法学硕士模型；限制输出，将输出限制为受限列表，而不是自由浮动文本。"}
+{"input":" 你能否概括介绍一下ChatGPT的训练过程？","target":" ChatGPT的训练过程分为预训练和监督微调或者指令微调。其中，预训练阶段是在来自互联网的广泛数据集上进行，Transformer架构是自然语言处理的最佳选择，主要目标是使模型具备理解语言模式的能力，但此时尚未具备理解指令或响应问题的能力。监督微调和指令微调则标志着模型从仅理解语言模式到理解并响应指令的转变。此阶段采用人类反馈强化学习作为后续微调步骤。"}
+{"input":" 在大语言模型上下文中的标记是什么？","target":" 将输入文本分解为多个片段，每一部分大约是一个单词大小的序列，我们称之为子词标记标记，可以是单词只是字符或者只是块的序列。"}
+{"input":" 大模型微调的原理及LORA的Lora原理是什么？","target":" 在高质量数据上微调小型法学硕士模型已显示出有希望的结果，并有助于减少幻觉；限制输出，将输出限制为受限列表，而不是自由浮动文本。loRa的矩阵初始化为什么如何要初始化为全0？lora的矩阵初始化为什么要初始化为全0？"}
+{"input":" Stable Diffusion里是如何用文本来控制生成的？","target":" Stable Diffusion是一种潜在扩散模型，主要通过自动编码器（VAE），U-Net以及三个编码器文本核心组件完成用文本对应的生成。Unet的Attention模块的LatentFeature和LatencyEmbedding作为输入Context进行Cross Attention操作，将图像信息和文本信息进行了融合，整体上一个经典的Transformer流程。"}
+{"input":" Stable Diffusion相比Diffusion主要解决什么问题？","target":" Diffusion的缺点是在反向扩散过程中需要将完整尺寸的图片输入到U-Net，当图片尺寸以及time step足够大时，Diffusion会非常的慢。"}
+{"input":" Diffusion每一步训练选择一个随机时间步长吗？","target":" 每一个训练包含：过程每一个训练样本选择随机的时间步长，将time step对应的高斯噪声应用到图片中，将time step转化为对应embedding；训练过程中模型损失会逐渐降低，越靠后的时间步长的变化幅度越小。如果时间间隔是递增的，那么必然使得模型过早的关注于早期的时间步长（因为忽略了后期较大的time step变化），而降低了关注较晚的时间步长的信息。为了解决这个问题，如果时间间隔是递增的，那么必然使得模型过早的关注于早期的时间步长（因为忽略了后期较大的time step变化），而降低了关注较晚的时间步长的信息。"}
+{"input":" 领域数据训练后，通用能力往往会有所下降，如何缓解模型遗忘通用能力?","target":" 为了解决这个问题通常在解决领域训练的时候加入通用数据集。这个比例多少比较合适还没有一个准确的答案。目前主要与领域数据量有关系，当数据量没有那么多时，一般领域数据与通用数据集的比例在1:5到1:10之间是比较合适的。"}
+{"input":" Adaptive Softmax在大语言模型中有何用处？","target":" 自适应Softmax在大型语言模型中非常有用。它在处理大型词汇表时进行有效的训练和推理，传统的Softmax涉及计算词汇表中每个单词的概率率，随着词汇表的增长，计算成本可能会变得昂贵。自适应Softmax可以有效地减少这种计算复杂度，提高模型的性能。"}
+{"input":"自适应Softmax是什么？","target":"自适应Softmax根据单词的常见程度将单词分组到簇中，从而减少了所需的计算量。这减少了计算词汇表概率分布所需的计算量。"}
+{"input":"自适应Softmax的优势是什么？","target":"通过使用自适应softmax，可以更有效地训练和运行大型语言模型，从而实现更快的实验和开发。"}
+{"input":"如何解决chatglm微调的灾难性遗忘问题？","target":"输入文本中无可用信息提取。"}
+{"input":"GPT-3和LLAMA在Layer Normalization上的区别是什么？","target":"GPT-3采用了Post-Layer Normalization的结构，而LLAMA采用了Pre-Layer Normalization的结构。"}
+{"input":"MHA多头注意力和MQA多查询注意力的区别是什么？","target":"与MHA不同的是，MQA让所有的头之间共享同一份Key和Value矩阵，每个头只单独保留了一份Query参数。"}
+{"input":"推理优化技术Flash Attention的作用是什么？","target":"Flash Attention是一种高效的注意力机制实现，以减少内存占用并提高计算速度，特别适用于具有长序列和大型模型参数的场景。"}
+{"input":"ZeRO，零冗余优化器的三个阶段是？","target":"1. 将优化器状态分割到不同设备上，减少内存占用；2. 除了优化器状态，还将模型参数分割到不同设备上；3. 将梯度和优化器状态也分割到不同设备上，实现最大的内存节省。"}
+{"input":"LangChain的核心模块是什么？","target":"Models、Prompts、Memory、Indexes、Agents、Chains。"}
+{"input":"Stable Diffusion XL是一个怎样的模型？","target":"Stable Diffusion XL是一个二阶段的级联扩散模型。"}
+{"input":"Mamba对RNN做了哪些改变？","target":"输入文本中无可用信息提取。"}
+{"input":"KV Cache和GQA优化的核心思想是什么？","target":"KV Cache通过缓存历史输入的Key（K）和Value（V）来减少重复计算，GQA是将查询头（Query Heads）分组，并在每组中共享一个键头（Key Head）和一个值头（Value Head）。"}
+{"input":"大模型预训练中loss spike的原因及解决方法是什么？","target":"参考论文 \u003c A Theory on Adam Instability in Large-Scale Machine Learning \u003e 以及知乎解读 https://zhuanlan.zhihu.com/p/675421518。"}
+{"input":"如何压缩视觉token量以提升效率？","target":"输入文本中无可用信息提取。"}
+{"input":"处理对话及语料数据时，针对数据去重用了哪些算法？","target":"输入文本中无可用信息提取。"}
+{"input":"LLaMa3.1的微调进行了几轮？","target":"关于LLaMa3.1的相关问题，https://zhuanlan.zhihu.com/p/712494477。"}
+{"input":"现有技术范式下，广义幻觉的解决方案是什么？","target":"广义幻觉只能靠外挂RAG、function_call的方式来解决；狭义幻觉的缓解方式其实还是调参数。"}
+{"input":"LLM推理时Decode阶段一次迭代一个token，有什么对应的加速方法？","target":"输入文本中无可用信息提取。"}
+{"input":"DETR的检测算法的创新点是什么？","target":"DETR将目标检测看作一种set prediction问题，CNN提取基础特征，送入Transformer做关系建模，得到的输出通过二分图匹配算法与图片上的ground truth做匹配。"}
+{"input":"如何将CNN backbone的output转化为可以被 Transformer Encoder 处理的序列化数据？","target":"进行维度压缩，序列化特征，结合位置编码；训练过程中，object queries可以强迫模型来生成不同的boxes，因为需要生成不同的boxes，所以在训练开始时可以随机初始化。"}
+{"input":"object queries是什么？object queries有什么用？","target":"object queries是N个learnable embedding，可以替换传统的anchor box来进行预测。在 DETR 中，Object query 向量代替 anchor box 向量用于表示检测模型的输出类别和空间信息，而其中包含的类别信息用于区分不同的目标，而空间信息则描述了该目标在图像中的位置。"}
+{"input":"怎么理解Query，在DETR中，Object query是由什么产生的？","target":"在 DETR 中，Object query 是一组预定义好的向量，由 transformer 解码器产生。它由一系列向量组成，每个向量都可以代表一个预测框。这些向量可以被视为检测模型的输出类别和空间信息的组合，而其中包含的类别信息用于区分不同的目标，而空间信息则描述了该目标在图像中的位置。"}
+{"input":"Loss如何设计？","target":"DETR使用二分图匹配，一一对应需要配对。前面输出的N个prediction；只要定义每对prediction box和image object匹配的cost就可以。如果prediction box类别和image object类别相同的概率越大（越大或者越小），或者两者的box差距越小（越小），那么配对的cost就越小（越小）。"}
+{"input":"旋转框IoU的计算方式？","target":"传入两个旋转矩形的四个顶点坐标，然后计算它们之间的重叠面积（Rotated IoU）。暴力方式：每次让一个框不动，另一个框旋转到和另一个框垂直，然后来IoU，最终取最小值IoU，代表性的PIOU损失。"}
+{"input":"目标检测中旋转框IOU的计算？","target":"暴力方式：每次让一个框不动，另一个框旋转到和另一个框垂直，然后来IoU，最终取最小值IoU。传入两个旋转矩形的四个顶点坐标，然后计算它们之间的重叠面积（Rotated IoU）。"}
+{"input":"局部注意力如何实现？","target":"局部注意力则把加权求和的范围缩小到给定窗口大小的局部范围。于是local Attention确定局部范围成为关键。第一种是对query-independent的全局上下文建模。第二种是对query-independent的全局上下文建模。Non-local block想要计算出每一个特定位置的全局上下文，但是经过训练之后，全局上下文是不受位置依赖的。"}
+{"input":"视觉任务中的长尾问题的常见解决方案","target":"两种基本方法：重采样、重加权。其中长尾分类最优的Decoupling算法依赖于2-stage的分步训练，特征提取backbone需要在长尾分布下学，而classifier又需要re-balancing的学。"}
+{"input":"Yolov5中的objectness的作用","target":"objectness分数用于控制客观性分数。如果我们在训练中改变objectness的权重（self.hyp['obj']），我们是否仍然应该在检测中简单地将objectness分数和cls分数相乘？如果是，如果我们设置“self.hyp[‘obj’]=0”会怎么样？通过这样做，在训练期间将不会控制客观性分数。objectness损失受到正样本和负样本之间极度不平衡的影响。当图像放大时，其中的对象数量保持不变，因此不平衡性增加（变得更糟）。损失增益将按比例进行补偿。"}
+{"input":"目标检测设置很多不同的anchor，能否改善小目标及非正常尺寸目标的性能？","target":"感受野足够大时，被忽略的信息就较少。目标检测任务中设置anchor要对齐感受野，anchor太大或者偏离感受野会对性能产生一定的影响。增大感受野的方法：使用空洞卷积；使用池化层；增大卷积核。"}
+{"input":"PISA采用了什么策略来提升recall和precision？","target":"PISA采用了IoU Hierarchical Local Rank (IoU-HLR)对样本进行排序并权值重标定，从而使得recall和precision都能够提升。"}
+{"input":"在CNN网络中，使用更大核尺寸的目的是什么？","target":"在CNN网络中，使用更大核尺寸的目的是为了捕获高分辨率模式，同时需要小尺寸核捕获低分辨率模式以及获得更高的精度和效率。"}
+{"input":"轻量化模型的优化方向有哪些？","target":"轻量化模型的优化方向包括参数量、浮点运算量、模型推理时延。"}
+{"input":"FPN的特征融合操作为什么选择相加而不是concat？","target":"FPN的特征融合选择相加而不是concat是为了降低计算量，因为如果使用concat，由于分辨率小的特征通道数更多，计算量是一笔不小的开销。"}
+{"input":"GAN中的模式坍缩问题如何识别和解决？","target":"GAN中的模式坍缩可以通过使用Mini-Batch Discrimination，Wasserstein GAN (WGAN)，和WGAN-GP（Wasserstein GAN with Gradient Penalty）来解决。"}
+{"input":"YOLOv5模型输出(1, 25200, 85)的含义及解码过程是什么？","target":"YOLOv5模型输出(1, 25200, 85)中包含的是预测框的数量、每个预测框的编码信息包括4个坐标、1个置信度和80个类别概率。解码过程涉及到过滤置信度分数低于阈值的对象、将类别置信度与边界框置信度相乘、获取最高置信度的类别、提取每个对象的边界框、应用非极大抑制等步骤。"}
+{"input":"分割网络采用编解码的方式中，上采样的区别是什么？","target":"分割网络采用编解码的方式中，上采样可以采用反池化/空洞卷积/双线性插值。SegNet使用反池化来保持高频细节的完整性，而空洞卷积允许显式控制特征响应的分辨率并有效扩大过滤器视野。"}
+{"input":"场景问题中，有没有避免NMS后处理的方案？","target":"避免NMS后处理的方案包括YOLOV10的一对一的头和DETR的头。"}
+{"input":"如何理解DETR中的object query的概念？","target":"DETR中的object query的概念是指为cross attention提供更好的位置先验，可以通过引入learnable queries或anchor box作为query来提供位置先验。"}
+{"input":"YOLOV5和YOLOV8 Head输出通道数分别是多少？","target":"YOLOV5和YOLOV8的Head输出通道数的具体数值未给出明确答案，但根据上下文推测，这可能取决于检测任务的类别数量和其他模型配置。"}
